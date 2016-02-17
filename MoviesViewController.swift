@@ -8,10 +8,12 @@
 
 import UIKit
 import AFNetworking
+import MBProgressHUD
 
 class MoviesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var connectionErrorView: UIView!
 
     var movies: [Movie]? {
         didSet {
@@ -25,8 +27,20 @@ class MoviesViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
-        APIManager.getMovies { (movies: [Movie]?) -> Void in
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        APIManager.getMovies { (movies: [Movie]?, errorOrNil: NSError?) -> Void in
+            if let error = errorOrNil {
+                print(error)
+                self.connectionErrorView.hidden = false
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+
+                return
+            }
+
             self.movies = movies
+
+            self.connectionErrorView.hidden = true
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
     }
 
