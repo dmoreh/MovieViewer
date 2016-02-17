@@ -14,4 +14,21 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
 
+    var movie: Movie? {
+        didSet {
+            guard let movie = movie else {
+                return
+            }
+
+            titleLabel.text = movie.title
+            overviewLabel.text = movie.overview
+            overviewLabel.sizeToFit()
+
+            if let posterURL = movie.posterURL {
+                posterImageView.setImageWithURL(posterURL)
+            } else {
+                posterImageView.image = nil
+            }
+        }
+    }
 }

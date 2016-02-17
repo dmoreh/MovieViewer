@@ -28,33 +28,26 @@ class MoviesViewController: UIViewController {
         APIManager.getMovies { (movies: [Movie]?) -> Void in
             self.movies = movies
         }
+    }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let vc = segue.destinationViewController as! MovieDetailsViewController
+        let cell = sender as! MovieTableViewCell
+        vc.movie = cell.movie
     }
 }
 
 extension MoviesViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        cell.setSelected(false, animated: true)
     }
 }
 
 extension MoviesViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieTableViewCell
-
-        let movie = self.movies![indexPath.row]
-
-        cell.titleLabel.text = movie.title
-        cell.overviewLabel.text = movie.overview
-
-        if let posterPath = movie.posterPath {
-            let baseURL = "http://image.tmdb.org/t/p/w500"
-            let imageURL = NSURL(string: baseURL + posterPath)
-            cell.posterImageView.setImageWithURL(imageURL!)
-        } else {
-            cell.posterImageView.image = nil
-        }
-
+        cell.movie = self.movies![indexPath.row]
         return cell
     }
 
