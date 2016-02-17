@@ -15,6 +15,7 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var detailsView: DetailsView!
 
     var movie: Movie?
+    var placeholderImage: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +24,13 @@ class MovieDetailsViewController: UIViewController {
             return
         }
 
-        if let posterURL = movie.posterURL {
-            backgroundImageView.setImageWithURL(posterURL)
+        if let posterURL = movie.posterURLHighResolution {
+            if let placeholderImage = self.placeholderImage {
+                backgroundImageView.setImageWithURL(posterURL, placeholderImage: placeholderImage)
+//                backgroundImageView.setImageWithURL(posterURL)
+            } else {
+                backgroundImageView.setImageWithURL(posterURL)
+            }
         }
 
         detailsView.movie = self.movie

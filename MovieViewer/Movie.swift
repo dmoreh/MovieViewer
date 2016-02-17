@@ -17,13 +17,19 @@ class Movie: NSObject {
                 return
             }
 
-            let baseURL = "http://image.tmdb.org/t/p/w500"
-            self.posterURL = NSURL(string: baseURL + posterPath)
+            let baseURL = "http://image.tmdb.org/t/p/"
+            self.posterURLLowResolution = NSURL(string: baseURL + kPosterPathLowResolution + posterPath)
+            self.posterURLHighResolution = NSURL(string: baseURL + kPosterPathHighResolution + posterPath)
         }
     }
     var popularity: Int?
-    var posterURL: NSURL?
+    var posterURLHighResolution: NSURL?
+    var posterURLLowResolution: NSURL?
     var releaseDate: String?
+    var lowResPoster: UIImage?
+
+    let kPosterPathLowResolution = "w90"
+    let kPosterPathHighResolution = "original"
 
     convenience init(data: NSDictionary) {
         self.init()

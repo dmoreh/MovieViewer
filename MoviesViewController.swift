@@ -64,8 +64,10 @@ class MoviesViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let vc = segue.destinationViewController as! MovieDetailsViewController
+
         let cell = sender as! MovieTableViewCell
         vc.movie = cell.movie
+        vc.placeholderImage = cell.posterImageView.image
     }
 }
 
