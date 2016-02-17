@@ -52,7 +52,7 @@ class MoviesViewController: UIViewController {
                 refreshControl.endRefreshing()
             }
 
-            if errorOrNil != nil {
+            guard errorOrNil == nil else {
                 self.connectionErrorView.hidden = false
                 return
             }
@@ -132,7 +132,5 @@ extension MoviesViewController: UISearchBarDelegate {
 
             return true
         })
-
-
     }
 }
