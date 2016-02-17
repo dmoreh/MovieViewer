@@ -18,6 +18,12 @@ class MoviesViewController: UIViewController {
 
     var movies: [Movie]? {
         didSet {
+            self.filteredMovies = movies
+        }
+    }
+
+    var filteredMovies: [Movie]? {
+        didSet {
             self.tableView.reloadData()
         }
     }
@@ -32,6 +38,10 @@ class MoviesViewController: UIViewController {
         refreshControl.addTarget(self, action: "fetchMovies:", forControlEvents: .ValueChanged)
         self.tableView.insertSubview(refreshControl, atIndex: 0)
         self.fetchMovies()
+
+        let searchBar = UISearchBar()
+        self.navigationItem.titleView = searchBar
+        searchBar.delegate = self
     }
 
     func fetchMovies(refreshControl: UIRefreshControl? = nil) {
@@ -68,16 +78,61 @@ extension MoviesViewController: UITableViewDelegate {
 
 extension MoviesViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // TODO: This line is really long. How to break it up?
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieTableViewCell
-        cell.movie = self.movies![indexPath.row]
+        cell.movie = self.filteredMovies![indexPath.row]
         return cell
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let movies = self.movies else {
+        guard let filteredMovies = self.filteredMovies else {
             return 0
         }
 
-        return movies.count
+        return filteredMovies.count
+    }
+}
+
+extension MoviesViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        return true;
+    }
+
+    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(false, animated: true)
+        return true;
+    }
+
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.text = ""
+        self.filteredMovies = self.movies
+        searchBar.resignFirstResponder()
+    }
+
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let movies = self.movies else {
+            return
+        }
+
+        guard searchText != ""  else {
+            self.filteredMovies = movies
+            return
+        }
+
+        self.filteredMovies = movies.filter({ (movie: Movie) -> Bool in
+            guard let title = movie.title else {
+                return false
+            }
+
+            // TODO: This line is really long. How to break it up?
+            guard let _ = title.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch) else {
+                return false
+            }
+
+            return true
+        })
+
+
     }
 }
