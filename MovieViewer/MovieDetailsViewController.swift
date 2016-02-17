@@ -15,7 +15,7 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var detailsView: DetailsView!
 
     var movie: Movie?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

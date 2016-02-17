@@ -40,5 +40,4 @@ class APIManager: NSObject {
         });
         task.resume()
     }
-
 }
