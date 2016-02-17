@@ -15,6 +15,7 @@ class MoviesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var connectionErrorView: UIView!
 
+
     var movies: [Movie]? {
         didSet {
             self.tableView.reloadData()
@@ -27,20 +28,27 @@ class MoviesViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "fetchMovies:", forControlEvents: .ValueChanged)
+        self.tableView.insertSubview(refreshControl, atIndex: 0)
+        self.fetchMovies()
+    }
+
+    func fetchMovies(refreshControl: UIRefreshControl? = nil) {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         APIManager.getMovies { (movies: [Movie]?, errorOrNil: NSError?) -> Void in
-            if let error = errorOrNil {
-                print(error)
-                self.connectionErrorView.hidden = false
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            if let refreshControl = refreshControl {
+                refreshControl.endRefreshing()
+            }
 
+            if errorOrNil != nil {
+                self.connectionErrorView.hidden = false
                 return
             }
 
             self.movies = movies
-
             self.connectionErrorView.hidden = true
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
     }
 
