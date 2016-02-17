@@ -24,7 +24,7 @@ class MovieTableViewCell: UITableViewCell {
             overviewLabel.text = movie.overview
             overviewLabel.sizeToFit()
 
-            if let posterURL = movie.posterURL {
+            if let posterURL = movie.posterURLLowResolution {
                 posterImageView.setImageWithURL(posterURL)
             } else {
                 posterImageView.image = nil
