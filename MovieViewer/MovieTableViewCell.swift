@@ -30,16 +30,18 @@ class MovieTableViewCell: UITableViewCell {
             } else {
                 posterImageView.image = nil
             }
+
+            // Set selected state color
+            // TODO: This should go in awakeFromNib, but that uses the self.bounds from the nib.
+            // It doesn't resize on larger screen sizes appropriately. What's the right way to do this?
+            let selectedColorView = UIView(frame: self.bounds)
+            selectedColorView.backgroundColor = Colors.cellSelectedColor()
+            self.selectedBackgroundView = selectedColorView
         }
     }
 
     override func awakeFromNib() {
         self.backgroundColor = UIColor.clearColor()
-
-        // Set selected state color
-        let selectedColorView = UIView(frame: self.bounds)
-        selectedColorView.backgroundColor = Colors.cellSelectedColor()
-        self.selectedBackgroundView = selectedColorView
 
         // Set text style
         self.titleLabel.textColor = Colors.cellTextColor()
