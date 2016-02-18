@@ -15,7 +15,7 @@ class Colors: NSObject {
     }
 
     static func lightTextColor() -> UIColor {
-        return ASCFlatUIColor.cloudsColor()
+        return UIColor.whiteColor()
     }
 
     static func darkTextColor() -> UIColor {

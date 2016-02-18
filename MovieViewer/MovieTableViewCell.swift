@@ -10,6 +10,7 @@ import UIKit
 
 class MovieTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var textContainerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
@@ -40,14 +41,35 @@ class MovieTableViewCell: UITableViewCell {
         selectedColorView.backgroundColor = Colors.cellSelectedColor()
         self.selectedBackgroundView = selectedColorView
 
-        // Set text color
+        // Set text style
         self.titleLabel.textColor = Colors.cellTextColor()
         self.overviewLabel.textColor = Colors.cellTextColor()
+
+        self.titleLabel.alpha = 0.8
+        self.overviewLabel.alpha = 0.6
+
+        self.titleLabel.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
+        self.overviewLabel.font = UIFont.systemFontOfSize(13, weight: UIFontWeightRegular)
 
         // Make posterImageView look pretty
         self.posterImageView.layer.masksToBounds = true;
         self.posterImageView.layer.borderColor = Colors.posterImageBorderColor().CGColor
         self.posterImageView.layer.borderWidth = 1
         self.posterImageView.layer.cornerRadius = 5
+    }
+
+    override func layoutSubviews() {
+        // Center text vertically
+        self.textContainerView.frame.size.height = self.calculateContainerHeight()
+
+        self.textContainerView.center = CGPoint(
+            x: self.textContainerView.center.x,
+            y: self.posterImageView.center.y
+        )
+    }
+
+    private func calculateContainerHeight() -> CGFloat {
+        return self.titleLabel.frame.size.height +
+            self.overviewLabel.frame.size.height
     }
 }
