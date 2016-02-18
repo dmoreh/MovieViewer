@@ -32,6 +32,7 @@ class MoviesViewController: UIViewController {
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.backgroundColor = Colors.tableViewBackroundColor()
 
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "fetchMovies:", forControlEvents: .ValueChanged)
@@ -41,6 +42,10 @@ class MoviesViewController: UIViewController {
         let searchBar = UISearchBar()
         self.navigationItem.titleView = searchBar
         searchBar.delegate = self
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.barTintColor = Colors.navigationBarColor()
     }
 
     func fetchMovies(refreshControl: UIRefreshControl? = nil) {
@@ -72,8 +77,7 @@ class MoviesViewController: UIViewController {
 
 extension MoviesViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath)
-        cell.setSelected(false, animated: true)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 

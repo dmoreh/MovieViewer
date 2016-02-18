@@ -52,6 +52,12 @@ class MovieDetailsViewController: UIViewController {
         if let imageColors = backgroundImageView.image?.getColors() {
             detailsView.layer.borderColor = imageColors.secondaryColor.CGColor
             detailsView.backgroundColor = imageColors.backgroundColor
+
+            // TODO: This line is really long. How to break it up?
+            let darkColor = imageColors.backgroundColor.isDarkColor ? imageColors.backgroundColor : imageColors.secondaryColor
+            let lightColor = !imageColors.backgroundColor.isDarkColor ? imageColors.backgroundColor : imageColors.secondaryColor
+            self.navigationController?.navigationBar.tintColor = lightColor
+            self.navigationController?.navigationBar.barTintColor = darkColor
         }
     }
 }

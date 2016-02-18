@@ -69,9 +69,10 @@ class DetailsView: UIView {
         self.layer.cornerRadius = 10
         self.alpha = 0.8
 
+        // TODO: Interested in what instructors think of this. 
         for label in [titleLabel, releaseDateLabel, overviewLabel, popularityLabel] {
             if let backgroundColor = self.backgroundColor {
-                label.textColor = backgroundColor.isDarkColor ? UIColor.whiteColor() : UIColor.blackColor()
+                label.textColor = backgroundColor.isDarkColor ? Colors.lightTextColor() : Colors.darkTextColor()
             }
         }
     }

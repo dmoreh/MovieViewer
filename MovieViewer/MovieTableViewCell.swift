@@ -31,4 +31,17 @@ class MovieTableViewCell: UITableViewCell {
             }
         }
     }
+
+    override func layoutSubviews() {
+        // TODO: Is this the right place to do all this?
+        self.backgroundColor = UIColor.clearColor()
+
+        self.titleLabel.textColor = Colors.cellTextColor()
+        self.overviewLabel.textColor = Colors.cellTextColor()
+
+        self.posterImageView.layer.masksToBounds = true;
+        self.posterImageView.layer.borderColor = Colors.posterImageBorderColor().CGColor
+        self.posterImageView.layer.borderWidth = 1
+        self.posterImageView.layer.cornerRadius = 5
+    }
 }
