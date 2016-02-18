@@ -40,7 +40,6 @@ class DetailsView: UIView {
             titleLabel.text = movie.title
             titleLabel.sizeToFit()
             releaseDateLabel.text = movie.releaseDate
-            releaseDateLabel.sizeToFit()
             overviewLabel.text = movie.overview
             overviewLabel.sizeToFit()
 
@@ -52,24 +51,17 @@ class DetailsView: UIView {
         }
     }
 
+    override func awakeFromNib() {
+        self.layer.cornerRadius = 10
+        self.alpha = 0.8
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        var frame = self.frame
-        frame.size.height = self.calculateHeight()
-        self.frame = frame
+        self.frame.size.height = self.calculateHeight()
 
-        let kPadding: CGFloat = 8
-        self.releaseDateLabel.center = CGPoint(
-            x: self.frame.size.width - self.releaseDateLabel.frame.size.width / 2 - kPadding,
-            y: self.releaseDateLabel.center.y
-        )
-
-        // TODO: Is this the right place to do this?
-        self.layer.cornerRadius = 10
-        self.alpha = 0.8
-
-        // TODO: Interested in what instructors think of this. 
+        // TODO: Interested in what instructors think of this.
         for label in [titleLabel, releaseDateLabel, overviewLabel, popularityLabel] {
             if let backgroundColor = self.backgroundColor {
                 label.textColor = backgroundColor.isDarkColor ? Colors.lightTextColor() : Colors.darkTextColor()

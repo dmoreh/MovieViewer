@@ -38,9 +38,7 @@ class MovieDetailsViewController: UIViewController {
         let kHeightShown: CGFloat = 100
         let kPadding: CGFloat = 20
 
-        var frame = detailsView.frame
-        frame.origin.y = self.view.frame.size.height - kHeightShown
-        detailsView.frame = frame
+        detailsView.frame.origin.y = self.view.frame.size.height - kHeightShown
         
         scrollView.contentSize = CGSize(
             width: self.view.frame.size.width,
