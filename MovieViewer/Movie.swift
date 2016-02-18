@@ -36,7 +36,10 @@ class Movie: NSObject {
 
         self.title = data["title"] as? String
         self.overview = data["overview"] as? String
-        self.popularity = data["popularity"] as? Int
+        if let voteAverage = data["vote_average"] as? Float {
+            let voteAveragePercentage = voteAverage * 10
+            self.popularity = Int(voteAveragePercentage)
+        }
         self.releaseDate = data["release_date"] as? String
         defer { self.posterPath = data["poster_path"] as? String } // deferred to trigger didSet. Is this ok?
     }
