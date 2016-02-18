@@ -42,7 +42,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-I've marked a bunch of issues I ran into with TODOs and GitHub comments, mostly around style questions.
+I've marked a bunch of [issues I ran into](https://github.com/dmoreh/MovieViewer/search?l=swift&q=todo&utf8=%E2%9C%93) with TODOs, mostly around style questions. Please take a look!
 
 I used [UIImageColors](https://github.com/jathu/UIImageColors) to customize colors to each poster, but for some reason it slows things down when using `imageView.setImageWithURL:placeholderImage:`, though it works fine with `imageView.setImageWithURL:`. 
 
