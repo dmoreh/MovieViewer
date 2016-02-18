@@ -32,13 +32,19 @@ class MovieTableViewCell: UITableViewCell {
         }
     }
 
-    override func layoutSubviews() {
-        // TODO: Is this the right place to do all this?
+    override func awakeFromNib() {
         self.backgroundColor = UIColor.clearColor()
 
+        // Set selected state color
+        let selectedColorView = UIView(frame: self.bounds)
+        selectedColorView.backgroundColor = Colors.cellSelectedColor()
+        self.selectedBackgroundView = selectedColorView
+
+        // Set text color
         self.titleLabel.textColor = Colors.cellTextColor()
         self.overviewLabel.textColor = Colors.cellTextColor()
 
+        // Make posterImageView look pretty
         self.posterImageView.layer.masksToBounds = true;
         self.posterImageView.layer.borderColor = Colors.posterImageBorderColor().CGColor
         self.posterImageView.layer.borderWidth = 1

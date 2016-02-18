@@ -24,13 +24,13 @@ class MovieDetailsViewController: UIViewController {
             return
         }
 
+
+        if let posterURL = movie.posterURLLowResolution {
+            backgroundImageView.setImageWithURL(posterURL)
+        }
+
         if let posterURL = movie.posterURLHighResolution {
-            if let placeholderImage = self.placeholderImage {
-                backgroundImageView.setImageWithURL(posterURL, placeholderImage: placeholderImage)
-//                backgroundImageView.setImageWithURL(posterURL)
-            } else {
-                backgroundImageView.setImageWithURL(posterURL)
-            }
+            backgroundImageView.setImageWithURL(posterURL)
         }
 
         detailsView.movie = self.movie

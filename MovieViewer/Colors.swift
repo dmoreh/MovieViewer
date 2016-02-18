@@ -34,6 +34,10 @@ class Colors: NSObject {
         return ASCFlatUIColor.cloudsColor()
     }
 
+    static func cellSelectedColor() -> UIColor {
+        return ASCFlatUIColor.pomegranateColor()
+    }
+
 }
 
 extension UIColor {
