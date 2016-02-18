@@ -30,6 +30,7 @@ class DetailsView: UIView {
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var popularityLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var heartImageView: UIImageView!
 
     var movie: Movie? {
         didSet {
@@ -53,7 +54,14 @@ class DetailsView: UIView {
 
     override func awakeFromNib() {
         self.layer.cornerRadius = 10
-        self.alpha = 0.8
+        self.alpha = 0.85
+
+        self.titleLabel.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
+        self.releaseDateLabel.font = UIFont.systemFontOfSize(14)
+        self.popularityLabel.font = UIFont.systemFontOfSize(16)
+        self.overviewLabel.font = UIFont.systemFontOfSize(16)
+
+        self.heartImageView.image = self.heartImageView.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     }
 
     override func layoutSubviews() {

@@ -134,8 +134,12 @@ Line 4</string>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" id="0Xh-t3-63m">
+                                                <rect key="frame" x="8" y="37" width="29" height="29"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1ZN-MU-jcy">
-                                                <rect key="frame" x="8" y="37" width="89" height="21"/>
+                                                <rect key="frame" x="38" y="38" width="89" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -155,6 +159,7 @@ Line 4</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="heartImageView" destination="0Xh-t3-63m" id="pLr-Nw-NZj"/>
                                             <outlet property="overviewLabel" destination="krD-oL-IeG" id="gGW-tn-lx2"/>
                                             <outlet property="popularityLabel" destination="1ZN-MU-jcy" id="KoJ-mk-he8"/>
                                             <outlet property="releaseDateLabel" destination="agl-Ra-45w" id="qgI-iu-mME"/>
@@ -196,4 +201,7 @@ Line 4</string>
             <point key="canvasLocation" x="162" y="406"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="heart" width="700" height="700"/>
+    </resources>
 </document>

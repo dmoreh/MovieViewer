@@ -24,7 +24,6 @@ class MovieDetailsViewController: UIViewController {
             return
         }
 
-
         if let posterURL = movie.posterURLLowResolution {
             backgroundImageView.setImageWithURL(posterURL)
         }
@@ -50,6 +49,7 @@ class MovieDetailsViewController: UIViewController {
         if let imageColors = backgroundImageView.image?.getColors() {
             detailsView.layer.borderColor = imageColors.secondaryColor.CGColor
             detailsView.backgroundColor = imageColors.backgroundColor
+            detailsView.heartImageView.tintColor = imageColors.secondaryColor
 
             // TODO: This line is really long. How to break it up?
             let darkColor = imageColors.backgroundColor.isDarkColor ? imageColors.backgroundColor : imageColors.secondaryColor
