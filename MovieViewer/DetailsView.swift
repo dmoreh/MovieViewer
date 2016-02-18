@@ -60,10 +60,14 @@ class DetailsView: UIView {
         self.frame = frame
 
         let kPadding: CGFloat = 8
-        self.releaseDateLabel.center = CGPoint(x: self.frame.size.width - self.releaseDateLabel.frame.size.width / 2 - kPadding, y: self.releaseDateLabel.center.y)
+        self.releaseDateLabel.center = CGPoint(
+            x: self.frame.size.width - self.releaseDateLabel.frame.size.width / 2 - kPadding,
+            y: self.releaseDateLabel.center.y
+        )
 
         // TODO: Is this the right place to do this?
         self.layer.cornerRadius = 10
+        self.alpha = 0.8
 
         for label in [titleLabel, releaseDateLabel, overviewLabel, popularityLabel] {
             if let backgroundColor = self.backgroundColor {

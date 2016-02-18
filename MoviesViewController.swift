@@ -15,7 +15,6 @@ class MoviesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var connectionErrorView: UIView!
 
-
     var movies: [Movie]? {
         didSet {
             self.filteredMovies = movies

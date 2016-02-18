@@ -49,8 +49,9 @@ class MovieDetailsViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-        detailsView.layer.borderColor = backgroundImageView.image?.getColors().secondaryColor.CGColor
-        detailsView.backgroundColor = backgroundImageView.image?.getColors().backgroundColor
-        detailsView.alpha = 0.8
+        if let imageColors = backgroundImageView.image?.getColors() {
+            detailsView.layer.borderColor = imageColors.secondaryColor.CGColor
+            detailsView.backgroundColor = imageColors.backgroundColor
+        }
     }
 }
