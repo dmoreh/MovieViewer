@@ -25,7 +25,21 @@ class Movie: NSObject {
     var popularity: Int?
     var posterURLHighResolution: NSURL?
     var posterURLLowResolution: NSURL?
-    var releaseDate: String?
+    var releaseDate: String? {
+        didSet {
+            guard let releaseDate = releaseDate else {
+                return
+            }
+
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-mm-dd"
+            if let date = formatter.dateFromString(releaseDate) {
+                formatter.dateStyle = NSDateFormatterStyle.LongStyle
+                self.releaseDate = formatter.stringFromDate(date)
+            }
+
+        }
+    }
     var lowResPoster: UIImage?
 
     let kPosterPathLowResolution = "w90"
@@ -40,7 +54,12 @@ class Movie: NSObject {
             let voteAveragePercentage = voteAverage * 10
             self.popularity = Int(voteAveragePercentage)
         }
-        self.releaseDate = data["release_date"] as? String
-        defer { self.posterPath = data["poster_path"] as? String } // deferred to trigger didSet. Is this ok?
+
+        // Deferred to trigger didSet. 
+        // TODO: Is this ok?
+        defer {
+            self.posterPath = data["poster_path"] as? String
+            self.releaseDate = data["release_date"] as? String
+        }
     }
 }

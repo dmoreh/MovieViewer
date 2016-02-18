@@ -34,6 +34,8 @@ class MoviesViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.backgroundColor = Colors.tableViewBackroundColor()
 
+        self.connectionErrorView.backgroundColor = Colors.navigationBarColor()
+
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "fetchMovies:", forControlEvents: .ValueChanged)
         self.tableView.insertSubview(refreshControl, atIndex: 0)
